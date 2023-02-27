@@ -9,7 +9,8 @@ editor_options:
 
 Oppgave 1.
 
-Tabellen tar utgangspunkt i alle utfallene ved å kaste en mynt 3 ganger. Dette gir 8 forskjellige kombinasjoner av kron og mynt: $2^3 = 8$
+Tabellen tar utgangspunkt i alle utfallene ved å kaste en mynt 3 ganger.
+Dette gir 8 forskjellige kombinasjoner av kron og mynt: $2^3 = 8$
 
 De relevante myntkastene vi ser på er alle kast med minst ett kron før
 siste kast, av de 8 opprinnelige kombinasjonene er det 2 ikke passer
@@ -23,7 +24,7 @@ Om en regner ut andel blant disse 6 kombinasjonene får en:
 
 $(0 + 0 + 0 + 1/2 + 1 + 1) / 6 = 5/12$
 
-Oppgave 2.  
+Oppgave 2.
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -44,7 +45,7 @@ data <- mean(prob)
 Sannsynligheten for at en observasjon $x_n = 1$ når den forrige
 observasjonen $x_{n-1} = 1$ blir `r data`
 
-Oppgave 3.  
+Oppgave 3.
 
 ```{r}
 rep <- 1e5
@@ -71,15 +72,26 @@ mean10 <- mean_probs[10]
 mean5 <- mean_probs[5]
 ```
 
-Utvalgstørrelsen med spesiell $N'$ gir: 
+Utvalgstørrelsen med spesiell $N'$ gir:
 
-- a. $N'=50$: `r mean50`
-- b. $N'=10$: `r mean10` 
-- c. $N'=5$: `r mean5`
+-   
 
-Fra de ulike gjennomsnittene kan en observere at de blir mindre når utvalgsstørrelsen blir mindre. Dette kommer av at sannsynligheten for å observere to 1ere på rad reduseres for færre observasjoner. 
+    a.  $N'=50$: `r mean50`
 
-d. For å finne hvilke utvalgsstørrelse som gir minimal $P(x_n = 1 | x_n-1 = 1) brukes analyse av *mean_probs*.
+-   
+
+    b.  $N'=10$: `r mean10`
+
+-   
+
+    c.  $N'=5$: `r mean5`
+
+Fra de ulike gjennomsnittene kan en observere at de blir mindre når
+utvalgsstørrelsen blir mindre. Dette kommer av at sannsynligheten for å
+observere to 1ere på rad reduseres for færre observasjoner.
+
+d.  For å finne hvilke utvalgsstørrelse som gir minimal \$P(x_n = 1 \|
+    x_n-1 = 1) brukes analyse av *mean_probs*.
 
 ```{r}
 lowest <- which.min(mean_probs)
@@ -87,7 +99,8 @@ lowest <- which.min(mean_probs)
 
 Denne funksjonen gir at laveste punkt på grafen er `r lowest`
 
-Oppgave 4. 
+Oppgave 4.
+
 ```{r}
 table <- data.frame(pulls = intervals+1, success = mean_probs)
 
@@ -103,14 +116,14 @@ ggplot(table, aes(pulls, success)) +
 
 Oppgave 5.
 
-a.
+a.  
 
 ```{r}
 rep <- 1e6
 n <- 100
 data <- array(sample(c(0,1), rep*n, replace=TRUE), c(rep,n))
 prob <- rep(NA, rep)
-intervals <- seq(0, 99, by=5)
+intervals <- seq(0, 99, by=1)
 mean_probs <- numeric(length(intervals))
 
 for (j in 1:length(intervals)) { for (i in 1:rep){
@@ -135,7 +148,7 @@ ggplot(table1e6, aes(pulls, success)) +
   theme_bw()
 ```
 
-b.
+b.  
 
 ```{r}
 rep <- 1e4
@@ -167,7 +180,7 @@ ggplot(table1e4, aes(pulls, success)) +
 theme_bw()
 ```
 
-c.
+c.  
 
 ```{r}
 rep <- 100
@@ -199,8 +212,15 @@ ggplot(table100, aes(pulls, success)) +
   theme_bw()
 ```
 
-Fra grafene kan en se at flere trekninger fører til mer statistisk nøyaktighet og at grafene blir mer gjevn.
+Fra grafene kan en se at flere trekninger fører til mer statistisk
+nøyaktighet og at grafene blir mer gjevn.
 
-6. Grafene fra Miller og Sanjurjo er data på sansynligheten for å treffe på et basketballskudd avhengig av hvor mange forsøk som gjennomføres. Sannsynligheten for å treffe reduseres avhengig av hvor mange spilleren har truffet på rad. 
+Oppgave 6.
 
-Grafen i oppgave 4 viser sannsynligheten for å suksess på avhengig av antall trekninger. Grafen i oppgave 4 har kun en sannsynlighet som baseres på hvor mange trekninger som gjøres. Grafen til Miller og Sanjurjo har ulike verdier avhengig av sannsynligheten en spiller har til å treffe samt også hvor mange treff den har på rad. 
+Grafene fra Miller og Sanjurjo er data på sansynligheten for å treffe på et basketballskudd avhengig av hvor mange forsøk som gjennomføres. Sannsynligheten for å treffe reduseres avhengig av hvor mange spilleren har truffet på rad.
+
+Grafen i oppgave 4 viser sannsynligheten for å suksess på avhengig av
+antall trekninger. Grafen i oppgave 4 har kun en sannsynlighet som
+baseres på hvor mange trekninger som gjøres. Grafen til Miller og
+Sanjurjo har ulike verdier avhengig av sannsynligheten en spiller har
+til å treffe samt også hvor mange treff den har på rad.
